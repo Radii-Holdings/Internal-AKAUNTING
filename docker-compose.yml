@@ -15,6 +15,13 @@ services:
     volumes:
       - app-data:/var/www/akaunting
     restart: unless-stopped
+  fix_permissions:
+    image: php:7.4-fpm
+    command: chown -R www-data:www-data /var/www/akaunting
+    volumes:
+      - app-data:/var/www/akaunting
+    depends_on:
+      - php
 
   db:
     image: mysql:latest
